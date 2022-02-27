@@ -46,8 +46,6 @@ async function syncAndSeed() {
 
 
 }
-syncAndSeed();
-
 
 module.exports = {
     syncAndSeed,
