@@ -4,6 +4,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 
 
@@ -17,7 +18,6 @@ class Main extends React.Component{
 
     async componentDidMount(){
         const response = await axios.get('/api/movies');
-        console.log(response);
         this.setState({
             movies: response.data
         })

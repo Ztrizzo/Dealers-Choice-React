@@ -12,6 +12,7 @@
   "dependencies": {
     "@babel/core": "^7.17.5",
     "@babel/preset-react": "^7.16.7",
+    "axios": "^0.26.0",
     "babel-loader": "^8.2.3",
     "express": "^4.17.3",
     "pg": "^8.7.3",
