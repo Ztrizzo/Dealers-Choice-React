@@ -1,3 +1,10 @@
+// console.log('test');
+
+// document.querySelector('body').innerHTML = '<hr/>'
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 
 
 class Main extends React.Component{
@@ -20,6 +27,7 @@ class Main extends React.Component{
         
 
         return <div>
+            <h1>Movies</h1>
             <ul>
                 {this.state.movies.map((movie, idx) => <li key={idx}>{movie.name}</li>)}
             </ul>

@@ -6,12 +6,14 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 
 
+
 async function init() {
     await syncAndSeed();
     app.listen(PORT, () => console.log(`listening on port: ${PORT}`));
 }
 init();
 
+app.use(express.static('./dist'));
 app.use(express.static('./src'));
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/index.html')));
