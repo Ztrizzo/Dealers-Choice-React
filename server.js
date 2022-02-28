@@ -31,7 +31,13 @@ app.get('/api/movies', async (req, res, next) => {
 
 app.get('/api/movies/:id', async (req, res, next) => {
     try{
-        const movie = await Movie.findByPk(req.params.id);
+        const movie = await Movie.findAll({
+            where:{
+                id: req.params.id
+            },
+            include: [Director]
+            
+        });
         res.send(movie);
     }
     catch(error){

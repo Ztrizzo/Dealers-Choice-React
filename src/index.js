@@ -1,6 +1,3 @@
-// console.log('test');
-
-// document.querySelector('body').innerHTML = '<hr/>'
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -27,8 +24,9 @@ class Main extends React.Component{
     async selectMovie(id){
         const response = await axios.get(`/api/movies/${id}`);
         this.setState({
-            movies: [response.data]
-        })
+            movies: response.data
+        });
+        
     }
 
 
@@ -43,10 +41,10 @@ class Main extends React.Component{
                         <th>Director</th>
                     </tr>
                 
-                    {this.state.movies.map((movie, idx) => {
+                    {this.state.movies.map(movie => {
                         return(
                             
-                        <tr key={idx} className='movie' onClick={() => {this.setState({movies: [movie]})}}>
+                        <tr key={movie.id} className='movie' onClick={() => {this.selectMovie(movie.id)}}>
                             <td>{movie.name}</td>
                             <td>{movie.yearCreated}</td>
                             <td>{movie.Director.name}</td>
