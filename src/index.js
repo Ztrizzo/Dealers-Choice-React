@@ -14,6 +14,7 @@ class Main extends React.Component{
         this.state = {
             movies: []
         };
+        this.selectMovie = this.selectMovie.bind(this);
     }
 
     async componentDidMount(){
@@ -23,14 +24,39 @@ class Main extends React.Component{
         })
     }
     
-    render(){
-        
+    async selectMovie(id){
+        const response = await axios.get(`/api/movies/${id}`);
+        this.setState({
+            movies: [response.data]
+        })
+    }
 
+
+    render(){
         return <div>
             <h1>Movies</h1>
-            <ul>
-                {this.state.movies.map((movie, idx) => <li key={idx}>{movie.name}</li>)}
-            </ul>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Title</th>
+                        <th>Year</th>
+                        <th>Director</th>
+                    </tr>
+                
+                    {this.state.movies.map((movie, idx) => {
+                        return(
+                            
+                        <tr key={idx} className='movie' onClick={() => {this.setState({movies: [movie]})}}>
+                            <td>{movie.name}</td>
+                            <td>{movie.yearCreated}</td>
+                            <td>{movie.Director.name}</td>
+                        </tr>)
+                    })}
+                    
+                </tbody>
+                
+            </table>
+            
         </div>;
     }
 }
