@@ -9,7 +9,8 @@ class Main extends React.Component{
     constructor(){
         super();
         this.state = {
-            movies: []
+            movies: [],
+            selected: {}
         };
         this.selectMovie = this.selectMovie.bind(this);
     }
@@ -24,7 +25,7 @@ class Main extends React.Component{
     async selectMovie(id){
         const response = await axios.get(`/api/movies/${id}`);
         this.setState({
-            movies: response.data
+            selected: response.data[0]
         });
         
     }
@@ -42,13 +43,29 @@ class Main extends React.Component{
                     </tr>
                 
                     {this.state.movies.map(movie => {
-                        return(
-                            
-                        <tr key={movie.id} className='movie' onClick={() => {this.selectMovie(movie.id)}}>
-                            <td>{movie.name}</td>
-                            <td>{movie.yearCreated}</td>
-                            <td>{movie.Director.name}</td>
-                        </tr>)
+                        if(movie.id === this.state.selected.id){
+                            console.log(movie);
+                            return(
+                                <tr key={movie.id} >
+                                    
+                                    <td>{movie.name}</td>
+                                    <td>{movie.yearCreated}</td>
+                                    <td>{movie.Director.name}</td>
+                                    <td>{movie.description}</td>
+                                    
+                                    
+                                </tr>
+                            )
+                        }
+                        else{
+                            return(   
+                                <tr key={movie.id} className='movie' onClick={() => {this.selectMovie(movie.id)}}>
+                                    <td>{movie.name}</td>
+                                    <td>{movie.yearCreated}</td>
+                                    <td>{movie.Director.name}</td>
+                                </tr>)
+                        }
+                        
                     })}
                     
                 </tbody>

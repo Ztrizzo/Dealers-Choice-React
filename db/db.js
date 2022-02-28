@@ -1,5 +1,6 @@
-const {Sequelize, STRING, INTEGER, UUID, UUIDV4} = require('sequelize');
+const {Sequelize, STRING, INTEGER, UUID, UUIDV4, TEXT} = require('sequelize');
 const sequelize = new Sequelize('postgres://localhost/react_db');
+const faker = require('faker');
 
 const Movie = sequelize.define('Movie', {
     id: {
@@ -12,6 +13,9 @@ const Movie = sequelize.define('Movie', {
     },
     yearCreated: {
         type: INTEGER
+    },
+    description: {
+        type: TEXT
     }
 })
 
@@ -39,10 +43,10 @@ async function syncAndSeed() {
     const ms = await Director.create({name: 'Martin Scorsese', country: 'United States'});
     const lvt = await Director.create({name: 'Lars von Trier', country: 'Denmark'});
 
-    await Movie.create({name: 'Melancholia', yearCreated: 2011, DirectorId: lvt.id});
-    await Movie.create({name: 'Taxi Driver', yearCreated: 1976, DirectorId: ms.id});
-    await Movie.create({name: 'Goodfellas', yearCreated: 1990, DirectorId: ms.id});
-    await Movie.create({name: 'Pulp Fiction', yearCreated: 1994, DirectorId: qt.id});
+    await Movie.create({name: 'Melancholia', yearCreated: 2011, DirectorId: lvt.id, description: faker.lorem.paragraph(3)});
+    await Movie.create({name: 'Taxi Driver', yearCreated: 1976, DirectorId: ms.id, description: faker.lorem.paragraph(3)});
+    await Movie.create({name: 'Goodfellas', yearCreated: 1990, DirectorId: ms.id, description: faker.lorem.paragraph(3)});
+    await Movie.create({name: 'Pulp Fiction', yearCreated: 1994, DirectorId: qt.id, description: faker.lorem.paragraph(3)});
 
 
 }
