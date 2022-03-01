@@ -46,15 +46,16 @@ class Main extends React.Component{
                         if(movie.id === this.state.selected.id){
                             console.log(movie);
                             return(
-                                <tr key={movie.id} >
+                                <div key={movie.id} className='details'>
                                     
-                                    <td>{movie.name}</td>
-                                    <td>{movie.yearCreated}</td>
-                                    <td>{movie.Director.name}</td>
-                                    <td>{movie.description}</td>
+                                    <span>{movie.name}</span>
+                                    <span>{movie.yearCreated}</span>
+                                    <span>{movie.Director.name}</span>
                                     
+                                    <p>{movie.description}</p>
                                     
-                                </tr>
+                                </div>
+                                
                             )
                         }
                         else{

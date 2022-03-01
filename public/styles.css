@@ -1,0 +1,57 @@
+ h1 {
+    text-align: center;
+    margin-bottom: 20vh;
+}
+
+table{
+    display: flex;
+    justify-content: center;
+    border-collapse: collapse;
+    width: 100vw;
+} 
+
+body{
+    display:flex;
+    justify-content: center;
+}
+
+td {
+    padding-left: 3em;
+    padding-right: 3em;
+    
+}
+
+tr {
+    border: 1px solid gray;
+    margin: 1px;
+    width: 33em;
+}
+
+th {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background-color: cornsilk;
+}
+
+.movie:hover {
+    background-color: #adadad;
+}
+
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 0 33%;
+    justify-content: space-around;
+    width: 33em;
+}
+
+.details p {
+    flex-basis:100%;
+    
+}
+
+
+
+tbody{
+    width: 33em;
+}

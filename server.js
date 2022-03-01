@@ -14,7 +14,7 @@ async function init() {
 init();
 
 app.use(express.static('./dist'));
-app.use(express.static('./src'));
+app.use(express.static('./public'));
 
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/index.html')));
 
