@@ -2,7 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-
+import MovieList from './movieList';
+import MovieDetails from './movieDetails';
 
 
 class Main extends React.Component{
@@ -39,48 +40,9 @@ class Main extends React.Component{
 
     render(){
         if(Object.keys(this.state.selected).length === 0)
-            return <div>
-                <h1 id='title'>Movies</h1>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Title</th>
-                            <th>Year</th>
-                            <th>Director</th>
-                        </tr>
-                    
-                        {this.state.movies.map(movie => {
-                            
-                                return(   
-                                   
-                                    <tr key={movie.id} className='movie' onClick={() => {this.selectMovie(movie.id)}}>
-                                        <td>{movie.name}</td>
-                                        <td>{movie.yearCreated}</td>
-                                        <td>{movie.Director.name}</td>
-                                    </tr>)
-
-                            
-                        })}
-                        
-                    </tbody>
-                    
-                </table>
-                
-            </div>;
-            else{
-                return(
-                    
-                        <div className='details'>
-                                        
-                            <h1>{this.state.selected.name}</h1>
-                            <h2>{this.state.selected.yearCreated}</h2>
-                            <h2>{this.state.selected.Director.name}</h2>
-                                        
-                            <p>Description: {this.state.selected.description}</p>
-                            <button onClick={this.clearSelected}>back</button>
-                         </div>
-                               
-                )
+            return <MovieList movies={this.state.movies} selectMovie={this.selectMovie}/>;
+        else{
+            return <MovieDetails selected={this.state.selected} clearSelected={this.clearSelected}/>
 
             }
     }
