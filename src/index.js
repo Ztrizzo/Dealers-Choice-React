@@ -13,6 +13,7 @@ class Main extends React.Component{
             selected: {}
         };
         this.selectMovie = this.selectMovie.bind(this);
+        this.clearSelected = this.clearSelected.bind(this);
     }
 
     async componentDidMount(){
@@ -30,50 +31,58 @@ class Main extends React.Component{
         
     }
 
+    async clearSelected(){
+        this.setState({
+            selected: {}
+        })
+    }
 
     render(){
-        return <div>
-            <h1>Movies</h1>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Title</th>
-                        <th>Year</th>
-                        <th>Director</th>
-                    </tr>
-                
-                    {this.state.movies.map(movie => {
-                        if(movie.id === this.state.selected.id){
-                            console.log(movie);
-                            return(
-                                <div key={movie.id} className='details'>
-                                    
-                                    <span>{movie.name}</span>
-                                    <span>{movie.yearCreated}</span>
-                                    <span>{movie.Director.name}</span>
-                                    
-                                    <p>{movie.description}</p>
-                                    
-                                </div>
-                                
-                            )
-                        }
-                        else{
-                            return(   
-                                <tr key={movie.id} className='movie' onClick={() => {this.selectMovie(movie.id)}}>
-                                    <td>{movie.name}</td>
-                                    <td>{movie.yearCreated}</td>
-                                    <td>{movie.Director.name}</td>
-                                </tr>)
-                        }
-                        
-                    })}
+        if(Object.keys(this.state.selected).length === 0)
+            return <div>
+                <h1 id='title'>Movies</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Title</th>
+                            <th>Year</th>
+                            <th>Director</th>
+                        </tr>
                     
-                </tbody>
+                        {this.state.movies.map(movie => {
+                            
+                                return(   
+                                   
+                                    <tr key={movie.id} className='movie' onClick={() => {this.selectMovie(movie.id)}}>
+                                        <td>{movie.name}</td>
+                                        <td>{movie.yearCreated}</td>
+                                        <td>{movie.Director.name}</td>
+                                    </tr>)
+
+                            
+                        })}
+                        
+                    </tbody>
+                    
+                </table>
                 
-            </table>
-            
-        </div>;
+            </div>;
+            else{
+                return(
+                    
+                        <div className='details'>
+                                        
+                            <h1>{this.state.selected.name}</h1>
+                            <h2>{this.state.selected.yearCreated}</h2>
+                            <h2>{this.state.selected.Director.name}</h2>
+                                        
+                            <p>Description: {this.state.selected.description}</p>
+                            <button onClick={this.clearSelected}>back</button>
+                         </div>
+                               
+                )
+
+            }
     }
 }
 
